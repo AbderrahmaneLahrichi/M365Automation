@@ -10,11 +10,16 @@ function New-M365User {
 
   #>
 
+  param(
+    # Path to the CSV file — defaults to New-Users-Template.csv in the current directory
+    [string]$CsvPath = ".\New-Users-Template.csv"
+  )
+
   # Grab the tenant domain directly from the active Microsoft Graph session
   $tenantDomain = ((Get-MgContext).Account -split '@')[1]
 
   # Read the CSV file containing new hire information
-  $users = Import-Csv -Path ".\New-Users-Template.csv"
+  $users = Import-Csv -Path $CsvPath
 
   # Pull all license SKUs from the tenant that have at least one license remaining
   $availableSku = Get-MgSubscribedSku -All | Where-Object {
