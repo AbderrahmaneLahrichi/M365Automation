@@ -11,9 +11,16 @@ function New-M365User {
   #>
 
   param(
-    # Path to the CSV file — defaults to New-Users-Template.csv in the current directory
-    [string]$CsvPath = ".\New-Users-Template.csv"
+    # Path to the CSV file containing new hire information — required
+    [Parameter(Mandatory)]
+    [string]$CsvPath
   )
+
+  # Make sure the file actually exists before doing anything
+  if (-not (Test-Path $CsvPath)) {
+    Write-Log -Message "CSV file not found at path: $CsvPath" -Level 'WARN'
+    return
+  }
 
   # Grab the tenant domain directly from the active Microsoft Graph session
   $tenantDomain = ((Get-MgContext).Account -split '@')[1]

@@ -63,7 +63,7 @@ This opens a browser login prompt. Sign in with your Microsoft 365 admin account
 | Function | Description | Parameters |
 |---|---|---|
 | `Connect-M365` | Authenticates to Microsoft Graph and auto-detects tenant info | None |
-| `New-M365User` | Bulk creates users from a CSV file, assigns licenses, adds to department groups, sends welcome emails | `-CsvPath` (optional — point to any CSV file, defaults to `New-Users-Template.csv`) |
+| `New-M365User` | Bulk creates users from a CSV file, assigns licenses, adds to department groups, sends welcome emails | `-CsvPath` (required — path to your CSV file) |
 | `Send-M365PasswordReminder` | Sends reminder emails to users who have not changed their temporary password | None |
 | `Invoke-M365Offboard` | Disables sign-in, removes from all groups, strips license. Account remains in Entra ID for compliance | `-Email` |
 | `Remove-M365User` | Permanently deletes a user or all users. Strips licenses before deletion | `-Email`, `-All` |
